@@ -1,0 +1,185 @@
+<!-- Sua tarefa é elaborar um programa para calcular os prováveis IDH e 
+desemprego de países com base em sua liberdade econômica.
+
+Nesse programa, o grau de liberdade econômica de um país é um valor entre 0 e 100 
+(onde 0 é a menor liberdade e 100 é a maior liberdade econômica). E os grupos de liberdade econômica são:
+
+LIVRE: Maior que 80 até 100
+
+QUASE LIVRE: Maior que 70 até 80
+
+MODERADAMENTE LIVRE: Maior que 60 até 70
+
+QUASE REPRIMIDO: Maior que 50 até 60
+
+REPRIMIDO: De 0 a 50
+
+a) Na tela do programa devem haver campos para:
+
+- Cadastrar o nome de um país
+
+- Cadastrar a população de um país
+
+- Cadastrar o grau de liberdade econômica de um país
+
+b) Deve haver um botão "Cadastrar País", que registra essas 3 informações em algum lugar no programa.
+
+c) Caso a população informada seja menor que 1000 ou o grau de liberdade econômica esteja fora do 
+intervalo válido, exiba um alert "Valores inválidos!" e ignore o cadastro.
+
+d) O usuário cadastra quantos países quiser.
+
+e) Deve haver um outro botão, o "Analisar". Ao ser clicado, ele exibe um relatório com todos os países 
+cadastrados, como no exemplo abaixo:
+
+País 1:  Singapura
+Categoria: Livre
+Habitantes: 5399200
+IDH médio provável: 0.85    
+Desemprego médio provável: 5%, ou seja, talvez 269960 estejam sem emprego
+
+País 2:  Moçambique
+Categoria: Reprimido
+Habitantes: 29500000
+IDH médio provável: 0.50    
+Desemprego médio provável: 20%, ou seja, talvez 5900000 estejam sem emprego
+
+Abaixo das informações de cada país, deve aparecer uma foto, segundo as regras a seguir:
+
+- Do Murray Rothbard, caso o país seja Livre.
+
+- Do Milton Friedman, caso o país seja Quase Livre.
+
+- Do John Maynard Keynes, caso o país seja Moderadamente Livre.
+
+- Do George Bernard Shaw, caso o país seja Quase Reprimido.
+
+- Do Karl Marx, caso o país seja Reprimido.
+
+Para saber como montar as frases por país, considere que os IDH e nível de desemprego médios do país, 
+conforme seu grau de liberdade econômica:
+
+LIVRE -  IDH médio: 0.85. Desemprego médio: 5%.
+
+QUASE LIVRE -  IDH médio: 0.77. Desemprego médio: 7%.
+
+MODERADAMENTE LIVRE -  IDH médio: 0.74. Desemprego médio: 8%.
+
+QUASE REPRIMIDO -  IDH médio: 0.65. Desemprego médio: 15%.
+
+REPRIMIDO -  IDH médio: 0.60. Desemprego médio: 22%.
+
+O número provável de desempregado você deve calcular com base na porcentagem provável.
+
+#FicaDica: Sua vida pode ficar mais fácil se usar mais de um vetor OU um vetor de JSONs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperação</title>
+</head>
+<center>
+
+    <body>
+        <h2>Calcule os IDH e taxa de Desemprego</h2>
+        <input id="in_nome" placeholder="Nome de um país"><br><br>
+        <input id="in_populacao" placeholder="População de um país"><br><br>
+        <input id="in_liberdade" placeholder="Grau de liberdade econômica"><br><br>
+
+        <button onclick="cadastrar()">Cadastrar País</button><br><br>
+        <button onclick="analisar()">Analisar</button><br><br>
+
+        <div id="resultado"></div>
+    </body>
+</center>
+
+</html>
+<script>
+
+    var paises = []
+
+
+    function cadastrar() {
+        var nome = in_nome.value
+        var populacao = Number(in_populacao.value)
+        var liberdade = Number(in_liberdade.value)
+
+        if (populacao < 1000 || (liberdade < 0 || liberdade > 100)) {
+
+            return alert("Valores inválidos!")
+        }
+
+        paises.push({
+            nome: nome,
+            populacao: populacao,
+            liberdade: liberdade
+        })
+
+    }
+
+    function analisar() {
+
+        var pais_result = {
+            l_economica: "",
+            idh: 0,
+            dpg_medio: 0,
+            foto: ""
+        }
+
+
+        for (var i = 0; i < paises.length; i++) {
+
+            if (paises[i].liberdade > 80 && paises[i].liberdade <= 100) {
+                pais_result.l_economica = "LIVRE"
+                pais_result.idh = 0.85                
+                pais_result.dpg_medio = 0.05
+                pais_result.foto = `livre.png`
+            }
+
+            else if (paises[i].liberdade > 70 && paises[i].liberdade <= 80) {
+                pais_result.l_economica = "QUASE LIVRE"
+                pais_result.idh = 0.77
+                pais_result.dpg_medio = 0.07
+                pais_result.foto = `quase-livre.png`
+            }
+            else if (paises[i].liberdade > 60 && paises[i].liberdade <= 70) {
+                pais_result.l_economica = "MODERADAMENTE LIVRE"
+                pais_result.idh = 0.74
+                pais_result.dpg_medio = 0.08
+                pais_result.foto = `moderadamente.png`
+            }
+            else if (paises[i].liberdade > 50 && paises[i].liberdade <= 60) {
+                pais_result.l_economica = "QUASE REPRIMIDO"
+                pais_result.idh = 0.65
+                pais_result.dpg_medio = 0.15
+                pais_result.foto = `quase-reprimido.png`
+            }
+            else if (paises[i].liberdade >= 0 && paises[i].liberdade <= 50) {
+                pais_result.l_economica = "REPRIMIDO"
+                pais_result.idh = 0.60
+                pais_result.dpg_medio = 0.22
+                pais_result.foto = `reprimido.png`
+            }
+
+
+            resultado.innerHTML += `
+            País ${i + 1}: <b>${paises[i].nome}</b><br>
+            
+            Categoria: <b>${pais_result.l_economica}</b><br>
+            
+            Habitantes: <b>${paises[i].populacao}</b><br>
+            
+            IDH médio provável: </b>${pais_result.idh}</b><br>   
+            
+            Desemprego médio provável: <b>${(pais_result.dpg_medio * 100).toFixed(1)}%</b>, 
+            ou seja, talvez <b>${paises[i].populacao * pais_result.dpg_medio}</b> estejam sem emprego<br><br>
+            
+            <img src="${pais_result.foto}" style="height:200px"><br><br>`
+        }
+
+    }
+</script>

@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" type="image/x-icon" sizes="192x192" href="../assets/icon/dado-removebg-preview.png">
+    <link rel="shortcut icon" type="image/x-icon" sizes="512x512" href="../assets/icon/dado-removebg-preview.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>.Nerd | Dashboards</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="dashboards.css">
+    <script src="../js/funcoes.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- scripts do Chart.js -->
+    <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
+
+</head>
+
+<body>
+<!-- <body onload="validarSessao(), atualizarFeed()"> -->
+
+    <div class="janela">
+        <div class="header-left">
+            <img src="../assets/icon/dado-removebg-preview.png" alt="logo">
+
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="../dashboard/dashboard.html">
+                    <h3>Gráficos da Interação Com Usuário</h3>
+                </a>
+            </div>
+
+            <div class="btn-nav">
+
+                <h3>Quiz</h3>
+
+            </div>
+
+            <div class="btn-nav-white">
+                <a href="./mural.html">
+                    <h3>Nota do Usuário</h3>
+                </a>
+            </div>
+
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+
+        </div>
+
+        <div class="dash">
+            <button onclick="bonus()" class="bonus">Bônus</button>
+                <div class="popup-wrapper">
+                    <div class="popup">
+
+                        <div class="popup-close">x</div>
+                        <div class="popup-content">
+                            <p>Monte seu pódio de Heróis e Faça o teste de seus conhecimentos matemáticos!</p>
+                            <a class="popup-link" href="cards.html">Ir para página Bônus</a>
+                        </div>
+                    </div>
+                </div>
+            <div class="quiz-dash">
+
+                <div class="topic">
+                    <h2>Qual dos Heróis abaixo não é vulnerável a magia?</h2>
+
+                    <select name="" id="sel_heroi" onchange="resposta()" class="quiz_campo">
+                        <option value="#">- Selecione uma opção -</option>
+                        <option value="1">SuperMan</option>
+                        <option value="2">Shazam</option>
+                        <option value="3">Capitão América</option>
+                    </select><br>
+                    <div id="resposta1"></div>
+                </div>
+
+                <div class="topic">
+                    <h2>Qual desses velocistas possuí o maior feito de velocidade?</h2>
+
+                    <select name="" id="sel_veloc" onchange="resposta2()" class="quiz_campo">
+                        <option value="#">- Selecione uma opção -</option>
+                        <option value="1">Barry Allen</option>
+                        <option value="2">Wally West</option>
+                        <option value="3">Jay Garrick</option>
+                    </select><br>
+                    <div id="resposta_2"></div>
+                </div>
+
+                <div class="topic">
+                    <h2>Primeiro Laterna Verde Canônico da Terra.</h2>
+
+                    <select name="" id="sel_lan" onchange="resposta3()" class="quiz_campo">
+                        <option value="#">- Selecione uma opção -</option>
+                        <option value="1">Alan Scott</option>
+                        <option value="2">Hal Jordan</option>
+                        <option value="3">Guy Gardner</option>
+                    </select><br>
+                    <div id="resposta_3"></div>
+                </div>
+
+                <div class="topic">
+                    <h2>Inteligência artificial criada acidentalmente por Tony Stark.</h2>
+
+                    <select name="" id="sel_iron" onchange="resposta4()" class="quiz_campo">
+                        <option value="#">- Selecione uma opção -</option>
+                        <option value="1">Mark III</option>
+                        <option value="2">J.A.R.V.I.S</option>
+                        <option value="3">Ultron</option>
+                    </select><br>
+                    <div id="resposta_4"></div>
+                </div>
+
+                <div class="topic"> 
+                    <h2>Qual nome do Machado que Thor usou em Wakanda?</h2>
+
+                    <select name="" id="sel_thor" onchange="resposta5()" class="quiz_campo">
+                        <option value="#">- Selecione uma opção -</option>
+                        <option value="1">Mjolnir</option>
+                        <option value="2">Stormbreaker</option>
+                        <option value="3">Leviatã</option>
+                    </select><br>
+                    <div id="resposta_5"></div>
+                </div>
+
+                <div class="topic">
+                    <h2>Nome do atual Bezouro Azul</h2>
+
+                    <select name="" id="sel_b_a" onchange="resposta6()" class="quiz_campo">
+                        <option value="#">- Selecione uma opção -</option>
+                        <option value="1">Dan Garret</option>
+                        <option value="2">Ted Kord</option>
+                        <option value="3">Jaime Reyes</option>
+                    </select><br>
+                    <div id="resposta_6"></div>
+                </div>
+
+            </div>
+
+        </div>
+    
+    </div>
+    </div>
+
+</body>
+
+</html>
+<script>
+
+    function resposta() {
+        var resposta = sel_heroi.value
+        if (resposta == 2) {
+            resposta1.innerHTML = `
+            <br><br><b style="color: green;">Resposta Correta!</b> <br><br>
+            <img src="../assets/imgs/shazam.jpg" style="width:150px"/>`
+        } else if (resposta == '#') {
+            resposta1.innerHTML = ' '
+        } else {
+            resposta1.innerHTML = `<br><br><b style="color: red;">Resposta Incorreta!</b>`
+        }
+    }
+
+    function resposta2() {
+        var resposta = sel_veloc.value
+        if (resposta == 2) {
+            resposta_2.innerHTML = `
+            <br><br><b style="color: green;">Resposta Correta!</b><br><br>
+            <img src="../assets/imgs/wally.jpg" style="width:150px"/>`
+        } else if (resposta == '#') {
+            resposta_2.innerHTML = ' '
+        } else {
+            resposta_2.innerHTML = `<br><br><b style="color: red;">Resposta Incorreta!</b>`
+        }
+    }
+
+    function resposta3() {
+        var resposta = sel_lan.value
+        if (resposta == 1) {
+            resposta_3.innerHTML = `
+            <br><br><b style="color: green;">Resposta Correta!</b><br><br>
+            <img src="../assets/imgs/lanterna.jpg" style="width:150px"/>`
+        } else if (resposta == '#') {
+            resposta_3.innerHTML = ' '
+        } else {
+            resposta_3.innerHTML = `<br><br><b style="color: red;">Resposta Incorreta!</b>`
+        }
+    }
+
+    function resposta4() {
+        var resposta = sel_iron.value
+        if (resposta == 3) {
+            resposta_4.innerHTML = `
+            <br><br><b style="color: green;">Resposta Correta!</b><br><br>
+            <img src="../assets/imgs/ultron.jpg" style="width:150px"/>`
+        } else if (resposta == '#') {
+            resposta_4.innerHTML = ' '
+        } else {
+            resposta_4.innerHTML = `<br><br><b style="color: red;">Resposta Incorreta!</b>`
+        }
+    }
+
+    function resposta5() {
+        var resposta = sel_thor.value
+        if (resposta == 2) {
+            resposta_5.innerHTML = `
+            <br><br><b style="color: green;">Resposta Correta!</b><br><br>
+            <img src="../assets/imgs/machado.jpg" style="width:150px"/>`
+        } else if (resposta == '#') {
+            resposta_5.innerHTML = ' '
+        } else {
+            resposta_5.innerHTML = `<br><br><b style="color: red;">Resposta Incorreta!</b>`
+        }
+    }
+
+    function resposta6() {
+        var resposta = sel_b_a.value
+        if (resposta == 3) {
+            resposta_6.innerHTML = `
+            <br><br><b style="color: green;">Resposta Correta!</b><br><br>
+            <img src="../assets/imgs/jaime.jpg" style="width:150px"/>`
+        } else if (resposta == '#') {
+            resposta_6.innerHTML = ' '
+        } else {
+            resposta_6.innerHTML = `<br><br><b style="color: red;">Resposta Incorreta!</b>`
+        }
+    }
+
+   
+</script>
+<script>
+    function bonus(){
+        const button = document.querySelector('button')
+const popup = document.querySelector('.popup-wrapper')
+
+button.addEventListener('click' , () =>{
+    popup.style.display = 'block'
+})
+
+popup.addEventListener('click' , event =>{
+    const classNameOfClickedElement = event.target.classList[0]
+    const classNames = ['popup-close', 'popup-wrapper','popup-link'] 
+    const shouldClosePopup = classNames.some(className => 
+    className === classNameOfClickedElement)
+    
+    if(shouldClosePopup){
+        popup.style.display = 'none'  
+    }
+})
+    }
+</script>
