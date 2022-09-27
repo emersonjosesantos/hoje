@@ -1,0 +1,154 @@
+/*INICIO DO CARROSEL*/
+
+/*index é o corpo do carrossel*/
+#index {
+    width: 100%;
+    height: 100%;
+    padding: 10vh 0 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+}
+
+/*slider é como se fosse um conteiner do carrossel*/
+.slider {
+    margin: 0 auto;
+    width: 90%;
+    height: 80vh;
+    overflow: hidden;
+
+}
+
+.carrossel {
+    gap: 0.5%;
+    padding: 0 10px;
+    list-style: none;
+    width: 200%;
+    height: 800px;
+    display: flex;
+}
+
+.carrossel input {
+    display: none;
+}
+
+.slide {
+    width: 25%;
+    transition: 1s;
+}
+
+.slide img {
+    border: 2px solid #000000;
+    width: 250px;
+    height: 60%;
+    
+}
+
+/*car_texto são os texto que aparecem no carrossel*/
+
+.car_texto {
+    width: 50%;
+    color: #ffffff;
+    font-size: 27px;
+    position: relative;
+    bottom: 40%;
+    left: 6%;
+    z-index: 1;
+}
+
+.grifado {
+    color: red;
+}
+
+.btn_SiCar:hover {
+    background-color: black;
+    color: #ffffff;
+}
+
+/*Botão de passar as imagens do carrossel*/
+
+.manual-navigation {
+    position: absolute;
+    width: 10px;
+    margin-top: -90px;
+    display: flex;
+    gap: 11800%;
+    justify-content: center;
+    bottom: 0;
+    top: 150%;
+    left: 49.6%;
+}
+
+.manual-btn {
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.8s;
+
+}
+
+.manual-btn:not(:last-child) {
+    margin-right: 40px;
+}
+
+/*Quando vc clica no botão, o comando empurra a imagem 25% pro lado, assim passando de slide*/
+.manual-btn:hover {
+    background-color: #00000000;
+}
+
+.active {
+    background-color: #00000000;
+}
+
+#radio1:checked~.first {
+    margin-left: -2px;
+}
+
+#radio2:checked~.first {
+    margin-left: -25%;
+}
+
+#radio3:checked~.first {
+    margin-left: -50%;
+}
+
+/*fim do botão*/
+
+/*Botão onde mostra em qual imagens do carrossel está*/
+.navigation-auto div {
+    border: 2px solid #856889;
+    padding: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 1s;
+
+}
+
+.navigation-auto {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    top: 85%;
+}
+
+.navigation-auto div:not(:last-child) {
+    margin-right: 40px;
+}
+
+#radio1:checked~.navigation-auto .auto-btn1 {
+    background-color: #cdffdf;
+}
+
+#radio2:checked~.navigation-auto .auto-btn2 {
+    background-color: #cdffdf;
+}
+
+#radio3:checked~.navigation-auto .auto-btn3 {
+    background-color: #cdffdf;
+}
+
+/*Fim do botão*/
+
+/* FIM DO CARROSEL */
